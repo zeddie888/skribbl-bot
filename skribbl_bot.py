@@ -22,75 +22,72 @@ PATH = "C:\Program Files (x86)\chromedriver.exe"
 # words = list(f.read().split("\n"))
 
 
-def test_logic(id):
+driver = webdriver.Chrome(PATH)
+driver.get("https://skribbl.io/?o8LqoYS1YWru")
+# Implement your test logic
 
-    print(f"PRINT THIS: {id}")
+playButton = driver.find_element_by_xpath("//button[text()='Play!']")
+playButton.click()
 
-    driver = webdriver.Chrome(PATH)
-    driver.get("https://skribbl.io/?bWyfz9xjEBjZ")
-    # Implement your test logic
-    playButton = driver.find_element_by_xpath("//button[text()='Play!']")
+waitStart = input("Enter once host starts")
 
-    playButton.click()
+chat = WebDriverWait(driver, 120).until(
+    EC.presence_of_element_located(
+        (By.XPATH, "//input[@id = 'inputChat']"))
+)
 
-    chat = WebDriverWait(driver, 120).until(
+while(True):
+    #checkpoint = input("Press enter when ready: ")
+    gameWIN = WebDriverWait(driver, 20).until(
         EC.presence_of_element_located(
-            (By.XPATH, "//input[@id = 'inputChat']"))
+            (By.XPATH, "//div[@id='overlay'][contains(@style, 'opacity')]"))
     )
-    # print(chat)
 
-    # toGuess = WebDriverWait(driver, 60).until(
-    #     EC.presence_of_element_located(
-    #         (By.XPATH, "//div[@id='currentWord']"))
-    # )
+    gameDetector = gameWIN.get_attribute('style')
 
-    while(True):
-        #checkpoint = input("Press enter when ready: ")
-        gameWIN = WebDriverWait(driver, 30).until(
-            EC.presence_of_element_located(
-                (By.XPATH, "//div[@id='overlay'][contains(@style, 'opacity')]"))
-        )
+    # time.sleep(20)
+    currentWord = None
+    while(currentWord is None or len(target) == 0):
+        currentWord = driver.find_element_by_xpath(
+            "//div[@id = 'currentWord']")
+        target = currentWord.text
+
+    f = open(f"letters{len(target)}.txt")
+    words = list(f.read().split("\n"))
+
+    #i = math.ceil(len(words) / N)
+    i = 0
+    while gameDetector.__contains__('0'):
+        shouldContinue = False
+        word = words[i]
+
+        currentWord = driver.find_element_by_xpath(
+            "//div[@id = 'currentWord']")
+        target = currentWord.text
+
+        for pos, letter in enumerate(word):
+            if letter != target[pos] and target[pos] != '_':
+                shouldContinue = True
+                break
+
+        i = (i+1) % len(words)
+        if shouldContinue:
+            continue
+        chat.clear()
+        chat.send_keys(word)
+        chat.send_keys(Keys.ENTER)
+
         gameWIN = driver.find_element_by_xpath(
             "//div[@id='overlay'][contains(@style, 'opacity')]")
         gameDetector = gameWIN.get_attribute('style')
 
-        # time.sleep(20)
-        currentWord = None
-        while(currentWord is None or len(currentWord) == 0):
-            currentWord = driver.find_element_by_xpath(
-                "//div[@id = 'currentWord']")
-            target = currentWord.text
-        f = open(f"letters{len(target)}.txt")
-        words = list(f.read().split("\n"))
-
-        i = math.ceil(len(words) / 6)
-        while gameDetector.__contains__('0'):
-            word = words[i]
-            chat.clear()
-            chat.send_keys(word)
-            chat.send_keys(Keys.ENTER)
-
-            gameWIN = driver.find_element_by_xpath(
-                "//div[@id='overlay'][contains(@style, 'opacity')]")
-            gameDetector = gameWIN.get_attribute('style')
-            i += 1
-            time.sleep(1)
+        time.sleep(1)
 
 
-N = 6   # Number of browsers to spawn
-thread_list = list()
+"""TODO
 
-# Start test
-for i in range(N):
-    t = threading.Thread(name='Test {}'.format(
-        i), target=test_logic, args=(i,))
-    t.start()
-    time.sleep(1)
-    print(t.name + ' started!')
-    thread_list.append(t)
+1. If word length is > 13, then make a new file and add the word to it
+2. Add word to list if not in list
 
-# Wait for all threads to complete
-for thread in thread_list:
-    thread.join()
 
-print('Test completed!')
+"""
