@@ -1,30 +1,24 @@
 """
 STATUS: WIP
+
+Bot is intended for use in private room only
 """
 
 from selenium import webdriver
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-import math
-import threading
 
 
 PATH = "C:\Program Files (x86)\chromedriver.exe"
-# driver = webdriver.Chrome(PATH)
-
-# driver.get("https://skribbl.io/?0ddyJUDBGjJI")
-
-# f = open("words.txt")
-# words = list(f.read().split("\n"))
-
 
 driver = webdriver.Chrome(PATH)
-driver.get("https://skribbl.io/?o8LqoYS1YWru")
-# Implement your test logic
+
+# Change this
+link = input("Paste link")
+driver.get(link)
 
 playButton = driver.find_element_by_xpath("//button[text()='Play!']")
 playButton.click()
@@ -37,7 +31,6 @@ chat = WebDriverWait(driver, 120).until(
 )
 
 while(True):
-    #checkpoint = input("Press enter when ready: ")
     gameWIN = WebDriverWait(driver, 20).until(
         EC.presence_of_element_located(
             (By.XPATH, "//div[@id='overlay'][contains(@style, 'opacity')]"))
@@ -45,7 +38,6 @@ while(True):
 
     gameDetector = gameWIN.get_attribute('style')
 
-    # time.sleep(20)
     currentWord = None
     while(currentWord is None or len(target) == 0):
         currentWord = driver.find_element_by_xpath(

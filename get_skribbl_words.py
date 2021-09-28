@@ -2,7 +2,9 @@
 """
 STATUS: 
 PART 1- obtain words from github, DONE
-PART 2- separate words, WIP
+PART 2- separate words, WIP, DONE
+"""
+
 """
 
 f3 = open("letters3.txt", "w+")
@@ -55,6 +57,7 @@ for word in words:
         f13.write(word)
         f13.write("\n")
 
+"""
 
 """ 
 ####################### PART 1 ################################
