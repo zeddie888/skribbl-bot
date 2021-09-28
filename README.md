@@ -2,11 +2,12 @@
 
 ## Usage
 
+For use on https://skribbl.io/
 Only use in Private Rooms
 
 Run skribbl_bot.py only
 
-1. Copy the invite link, paste it inside driver.get()
+1. Paste in skribbl link and enter
 
 2. When the host starts the game, in your run terminal, enter a random key and press enter
 
