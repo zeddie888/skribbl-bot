@@ -5,7 +5,45 @@ PART 1- obtain words from github, DONE
 PART 2- separate words, WIP, DONE
 """
 
+
+""" 
+####################### PART 1 ################################
+import time
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium import webdriver
+
+
+PATH = "C:\Program Files (x86)\chromedriver.exe"
+driver = webdriver.Chrome(PATH)
+
+driver.get("https://skribbliohints.github.io/")
+
+f = open("skribbl_words.txt", "w+")
+
+words = WebDriverWait(driver, 15).until(
+    EC.presence_of_all_elements_located(
+        (By.XPATH, "//div[@class='b']"))
+)
+
+for word in words:
+    f.write(word.text)
+    f.write('\n')
+
+
+print("DONE")
+f.close()
+driver.close() 
+
 """
+
+
+"""
+
+###### PART 2 ############
 
 f3 = open("letters3.txt", "w+")
 f4 = open("letters4.txt", "w+")
@@ -58,35 +96,3 @@ for word in words:
         f13.write("\n")
 
 """
-
-""" 
-####################### PART 1 ################################
-import time
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium import webdriver
-
-
-PATH = "C:\Program Files (x86)\chromedriver.exe"
-driver = webdriver.Chrome(PATH)
-
-driver.get("https://skribbliohints.github.io/")
-
-f = open("skribbl_words.txt", "w+")
-
-words = WebDriverWait(driver, 15).until(
-    EC.presence_of_all_elements_located(
-        (By.XPATH, "//div[@class='b']"))
-)
-
-for word in words:
-    f.write(word.text)
-    f.write('\n')
-
-
-print("DONE")
-f.close()
-driver.close() """
