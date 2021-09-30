@@ -11,13 +11,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
+link = input("Paste link: ")
 
 PATH = "C:\Program Files (x86)\chromedriver.exe"
-
 driver = webdriver.Chrome(PATH)
 
-# Change this
-link = input("Paste link")
+
 driver.get(link)
 
 playButton = driver.find_element_by_xpath("//button[text()='Play!']")
