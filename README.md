@@ -5,7 +5,7 @@
 For use on https://skribbl.io/
 Only use in Private Rooms
 
-Run skribbl_bot.py only
+Run skribbl_bot.py:
 
 1. Paste in skribbl link and enter
 
@@ -18,3 +18,8 @@ Run skribbl_bot.py only
 
 1. Handling if word is not stored in a letters<num>.txt file
 2. Image recognition
+
+  
+## Note: getting words
+ 
+get_skribbl_words.py used to get words from https://skribbliohints.github.io/
