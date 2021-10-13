@@ -3,15 +3,15 @@
 ## Usage
 
 For use on https://skribbl.io/
-Only use in Private Rooms
+(Only use in Private Rooms, advised)
 
 Run skribbl_bot.py:
 
-1. Paste in skribbl link and enter
+1. Paste in skribbl join link and enter
 
-2. When the host starts the game, in your run terminal, enter a random key and press enter
+2. When the host starts the game, in your run terminal, type a random letter and press enter. This will trigger the bot.
 
-3. Let the bot do the rest
+3. Let the bot do the rest. NOTE that this bot CANNOT draw.
 
 
 ## Future Updates
