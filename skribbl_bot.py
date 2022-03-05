@@ -22,12 +22,14 @@ driver.get(link)
 playButton = driver.find_element_by_xpath("//button[text()='Play!']")
 playButton.click()
 
+# annoying but hard to avoid at the moment
 waitStart = input("Enter once host starts")
 
 chat = WebDriverWait(driver, 120).until(
     EC.presence_of_element_located(
         (By.XPATH, "//input[@id = 'inputChat']"))
 )
+
 
 while(True):
     gameWIN = WebDriverWait(driver, 20).until(
@@ -72,7 +74,7 @@ while(True):
             "//div[@id='overlay'][contains(@style, 'opacity')]")
         gameDetector = gameWIN.get_attribute('style')
 
-        time.sleep(1)
+        time.sleep(1)  # Spam detected if wait interval < 1 apparently
 
 
 """
