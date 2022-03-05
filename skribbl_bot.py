@@ -75,7 +75,8 @@ while(True):
         time.sleep(1)
 
 
-"""TODO
+"""
+TODO
 
 1. If word length is > 13, then make a new file and add the word to it
 2. Add word to list if not in list
