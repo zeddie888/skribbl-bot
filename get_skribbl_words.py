@@ -1,12 +1,11 @@
 
 """
-STATUS: 
+STATUS:
 PART 1- obtain words from github, DONE
 PART 2- separate words, WIP, DONE
 """
 
 
-""" 
 ####################### PART 1 ################################
 import time
 from selenium.webdriver.support import expected_conditions as EC
@@ -36,7 +35,7 @@ for word in words:
 
 print("DONE")
 f.close()
-driver.close() 
+driver.close()
 
 """
 
@@ -94,5 +93,3 @@ for word in words:
     if a == 13:
         f13.write(word)
         f13.write("\n")
-
-"""
